@@ -13,7 +13,7 @@ function Nav(props) {
             name="search"
             type="text"
             className="form-control"
-            placeholder="Search For an Employee"
+            placeholder="Search Employees"
             id="search"
           />
           <br />

@@ -1,9 +1,9 @@
 import axios from "axios";
-const BASEURL = "https://randomuser.me/api/?results=10";
+
+// Export an object containing methods we'll use for accessing the Dog.Ceo API
 
 export default {
-  search: function (query) {
-    return axios.get(BASEURL + query);
+  getAllEmployees: function () {
+    return axios.get("https://randomuser.me/api/?results=50");
   }
 };
-

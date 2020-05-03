@@ -4,7 +4,7 @@ import Row from "./Row";
 import Col from "./Col";
 import Card from "./Card";
 import Nav from "./Nav";
-import ResultList from "./ResultList";
+import TableArea from "./TableArea";
 import API from "../utils/API";
 
 class EmployeeContainer extends Component {
@@ -18,9 +18,14 @@ class EmployeeContainer extends Component {
   //   this.searchEmployees("The Matrix");
   // }
 
-  searchEmployees = query => {
-    API.search(query)
-      .then(res => this.setState({ result: res.data }))
+
+  searchEmployees = () => {
+    API.getAllEmployees()
+      .then(res =>
+        this.setState({
+          result: res.results
+        })
+      )
       .catch(err => console.log(err));
   };
 
@@ -32,7 +37,7 @@ class EmployeeContainer extends Component {
     });
   };
 
-  // When the form is submitted, search the OMDB API for the value of `this.state.search`
+  // When the form is submitted, search the randomuser API for the value of `this.state.search`
   handleFormSubmit = event => {
     event.preventDefault();
     this.searchEmployees(this.state.search);
@@ -53,10 +58,11 @@ class EmployeeContainer extends Component {
         <Row>
           <Col size="md-12">
             <Card
-              heading={this.state.result.name || "Search for an Employee to Begin"}
+              heading={this.state.result.name || "All Employees"}
             >
               {this.state.result.Title ? (
-                <ResultList results={this.state.results} />
+                <TableArea results={this.state.result}>
+                </TableArea>
               ) : (
                   <h3>No Results to Display</h3>
                 )}
