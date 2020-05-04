@@ -9,25 +9,36 @@ import API from "../utils/API";
 
 class EmployeeContainer extends Component {
   state = {
-    result: {},
+    result: [],
     search: ""
   };
 
   // When this component mounts, search for the movie "The Matrix"
-  // componentDidMount() {
-  //   this.searchEmployees("The Matrix");
-  // }
+  componentDidMount() {
+    this.searchEmployees();
+  }
 
 
   searchEmployees = () => {
     API.getAllEmployees()
-      .then(res =>
+      .then(res => {
+        console.log(res)
         this.setState({
-          result: res.results
+          result: res.data.results
         })
-      )
+      })
       .catch(err => console.log(err));
   };
+
+  sortEmployees = event => {
+    const name = event.target.name;
+    console.log(name);
+
+    //make a copy of the result state array
+    //.sort on the copy
+    let arrCopy = [...this.state.result]
+    //this.setState(result: the copied one)
+  }
 
   handleInputChange = event => {
     const value = event.target.value;
@@ -58,11 +69,16 @@ class EmployeeContainer extends Component {
         <Row>
           <Col size="md-12">
             <Card
-              heading={this.state.result.name || "All Employees"}
+              // heading={this.state.result.name || "All Employees"}
+              heading={"All Employees"}
             >
-              {this.state.result.Title ? (
-                <TableArea results={this.state.result}>
-                </TableArea>
+              {/* {false ? ( */}
+              {this.state.result.length ? (
+                <TableArea 
+                  results={this.state.result}
+                  search={this.state.search}
+                  sortEmployees={this.sortEmployees}
+                />
               ) : (
                   <h3>No Results to Display</h3>
                 )}

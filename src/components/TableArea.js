@@ -4,9 +4,9 @@ import ResultsTable from "./ResultsTable";
 
 function TableArea(props) {
     return (
-        <table class="table table-striped">
-            <TableHeader />
-            <ResultsTable />
+        <table className="table table-striped">
+            <TableHeader sortEmployees={props.sortEmployees}/>
+            <ResultsTable results={props.results} search={props.search}/>
         </table>
     );
 }
