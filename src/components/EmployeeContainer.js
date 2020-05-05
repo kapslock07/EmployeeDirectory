@@ -30,15 +30,32 @@ class EmployeeContainer extends Component {
       .catch(err => console.log(err));
   };
 
-  sortEmployees = event => {
-    const name = event.target.name;
-    console.log(name);
+  // sortEmployees = event => {
+  //   const name = event.target.name;
+  //   console.log(name);
 
-    //make a copy of the result state array
-    //.sort on the copy
-    let arrCopy = [...this.state.result]
-    //this.setState(result: the copied one)
-  }
+  //   //   //make a copy of the result state array
+  //   //   //.sort on the copy
+  //   //   let arrCopy = [...this.state.result]
+
+
+  //   //   // sort by name
+  //   //   arrCopy.sort(function (a, b) {
+  //   //     var nameA = a.name.toUpperCase(); // ignore upper and lowercase
+  //   //     var nameB = b.name.toUpperCase(); // ignore upper and lowercase
+  //   //     if (nameA < nameB) {
+  //   //       return -1;
+  //   //     }
+  //   //     if (nameA > nameB) {
+  //   //       return 1;
+  //   //     }
+  //   //     // names must be equal
+  //   //     return 0;
+  //   //   });
+
+  //   //   this.setState({ result: arrCopy });
+
+  // }
 
   handleInputChange = event => {
     const value = event.target.value;
@@ -74,7 +91,7 @@ class EmployeeContainer extends Component {
             >
               {/* {false ? ( */}
               {this.state.result.length ? (
-                <TableArea 
+                <TableArea
                   results={this.state.result}
                   search={this.state.search}
                   sortEmployees={this.sortEmployees}
