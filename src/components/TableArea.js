@@ -1,12 +1,12 @@
 import React from "react";
 import TableHeader from "./TableHeader";
-import ResultsTable from "./ResultsTable";
+import DataBody from "./DataBody";
 
 function TableArea(props) {
     return (
         <table className="table table-striped">
-            <TableHeader sortEmployees={props.sortEmployees}/>
-            <ResultsTable results={props.results} search={props.search}/>
+            <TableHeader sortEmployees={props.sortEmployees} />
+            <DataBody results={props.results} search={props.search} />
         </table>
     );
 }
