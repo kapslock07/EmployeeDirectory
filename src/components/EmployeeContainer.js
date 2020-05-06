@@ -5,12 +5,15 @@ import Col from "./Col";
 import Card from "./Card";
 import Nav from "./Nav";
 import TableArea from "./TableArea";
+import TableHeader from "./TableHeader";
+
 import API from "../utils/API";
 
 class EmployeeContainer extends Component {
   state = {
     result: [],
-    search: ""
+    search: "",
+    order: "ascend"
   };
 
   // When this component mounts, search for the movie "The Matrix"
@@ -30,31 +33,61 @@ class EmployeeContainer extends Component {
       .catch(err => console.log(err));
   };
 
-  // sortEmployees = event => {
-  //   const name = event.target.name;
-  //   console.log(name);
+  sortEmployees = event => {
+    const name = event.target.name;
+    console.log(name);
 
-  //   //   //make a copy of the result state array
-  //   //   //.sort on the copy
-  //   //   let arrCopy = [...this.state.result]
+    //make a copy of the result state array
+    //.sort on the copy
+    let arrCopy = [...this.state.result]
+
+    // sort by name
+    arrCopy.sort(function (a, b) {
+      var nameA = a.name.toUpperCase(); // ignore upper and lowercase
+      var nameB = b.name.toUpperCase(); // ignore upper and lowercase
+      if (nameA < nameB) {
+        return -1;
+      }
+      if (nameA > nameB) {
+        return 1;
+      }
+      // names must be equal
+      return 0;
+    });
+    this.setState({ result: arrCopy });
+
+  }
 
 
-  //   //   // sort by name
-  //   //   arrCopy.sort(function (a, b) {
-  //   //     var nameA = a.name.toUpperCase(); // ignore upper and lowercase
-  //   //     var nameB = b.name.toUpperCase(); // ignore upper and lowercase
-  //   //     if (nameA < nameB) {
-  //   //       return -1;
-  //   //     }
-  //   //     if (nameA > nameB) {
-  //   //       return 1;
-  //   //     }
-  //   //     // names must be equal
-  //   //     return 0;
-  //   //   });
 
-  //   //   this.setState({ result: arrCopy });
-
+  // sortEmployees = (a, b) => {
+  //   if (this.state.order === "ascend") {
+  //     // account for missing values
+  //     if (a[TableHeader] === undefined) {
+  //       return 1;
+  //     } else if (b[TableHeader] === undefined) {
+  //       return -1;
+  //     }
+  //     // numerically
+  //     else if (TableHeader === "name") {
+  //       return a[TableHeader].lastName.localeCompare(b[TableHeader].lastName);
+  //     } else {
+  //       return a[TableHeader] - b[TableHeader];
+  //     }
+  //   } else {
+  //     // account for missing values
+  //     if (a[TableHeader] === undefined) {
+  //       return 1;
+  //     } else if (b[TableHeader] === undefined) {
+  //       return -1;
+  //     }
+  //     // numerically
+  //     else if (TableHeader === "name") {
+  //       return b[TableHeader].lastName.localeCompare(a[TableHeader].lastName);
+  //     } else {
+  //       return b[TableHeader] - a[TableHeader];
+  //     }
+  //   }
   // }
 
   handleInputChange = event => {
